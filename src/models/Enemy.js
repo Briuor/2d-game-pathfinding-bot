@@ -7,7 +7,7 @@ export default class Enemy extends GameObject {
     }
 
     lerp(start, end, amt) {
-        return (1 - amt) * start + amt * end
+        return (1-amt)*start+amt*end
     }
 
     move(prev, nextPoint, dt) {
