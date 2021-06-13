@@ -17,7 +17,7 @@ class Game {
     }
 
     initInputListener(gameCtx) {
-        document.addEventListener("mousemove", (e) => {
+        document.addEventListener("click", (e) => {
             var rect = this.canvas.getBoundingClientRect();
             gameCtx.mouse = { x: e.clientX - rect.left, y: e.clientY - rect.top };
         })
@@ -31,10 +31,9 @@ class Game {
         this.player.move(this.mouse, dt);
         // console.log(this.player, this.enemy)
         const enemyPath = this.map.findPath(this.enemy.x, this.enemy.y, this.player.x, this.player.y);
-        if (enemyPath.length > 2) {
-            this.enemy.move(enemyPath[0], enemyPath[1], dt);
-            // this.enemy.x = enemyPath[1][0] * this.map.tileSize;
-            // this.enemy.y = enemyPath[1][1] * this.map.tileSize;
+        this.path = enemyPath;
+        if (enemyPath.length >= 2) {
+            this.enemy.move([enemyPath[0][0] + 0.5, enemyPath[0][1] + 0.5], [enemyPath[1][0] + 0.5, enemyPath[1][1] + 0.5], dt);
         }
         // move enemy
     }
@@ -42,6 +41,7 @@ class Game {
     render() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.map.draw(this.ctx);
+        this.map.drawPath(this.ctx, this.path || [])
         this.player.draw(this.ctx);
         this.enemy.draw(this.ctx);
     }

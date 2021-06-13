@@ -9,6 +9,10 @@ export default class GameObject {
 
     draw(ctx) {
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.w, this.h);
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 10, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // ctx.fillRect(this.x, this.y, this.w, this.h);
     }
 }
