@@ -5,13 +5,13 @@ import TileMap from "./map/TileMap.js";
 class Game {
     constructor() {
         this.canvas = document.getElementById('canvas');
-        this.canvas.width = window.innerWidth - 4;
-        this.canvas.height = window.innerHeight - 4;
+        this.map = new TileMap();
+        this.canvas.width = 35*this.map.tileSize;
+        this.canvas.height = 17*this.map.tileSize;
         this.ctx = canvas.getContext('2d');
 
-        this.map = new TileMap();
-        this.player = new Player(2*this.map.tileSize, 3*this.map.tileSize, this.map.tileSize, this.map.tileSize);
-        this.enemy = new Enemy(8*this.map.tileSize, 3*this.map.tileSize, this.map.tileSize, this.map.tileSize);
+        this.player = new Player(3*this.map.tileSize, 3.5*this.map.tileSize, this.map.tileSize, this.map.tileSize);
+        this.enemy = new Enemy(30*this.map.tileSize, 10*this.map.tileSize, this.map.tileSize, this.map.tileSize);
         this.mouse = null;
         this.initInputListener(this);
     }
@@ -28,12 +28,10 @@ class Game {
         let now = Date.now();
         let dt = (now - this.lastUpdate) / 1000;
         this.lastUpdate = now;
-        // move player
-        // this.player.move(this.mouse, dt);
         const enemyPath = this.map.findPath(this.enemy.x, this.enemy.y, this.player.x, this.player.y);
         this.path = enemyPath;
         if (enemyPath.length >= 2) {
-            this.enemy.move([enemyPath[0][0] + 0.5, enemyPath[0][1] + 0.5], [enemyPath[1][0] + 0.5, enemyPath[1][1] + 0.5], dt);
+            this.enemy.move([enemyPath[1][0] + 0.5, enemyPath[1][1] + 0.5], dt);
         }
     }
 

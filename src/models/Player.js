@@ -2,7 +2,7 @@ import GameObject from "./GameObject.js";
 
 export default class Player extends GameObject{
     constructor(x, y, w, h) {
-        super(x, y, w, h, "white");
+        super(x, y, w, h, "#f0f6f0");
     }
 
     move(mouse, dt) {
