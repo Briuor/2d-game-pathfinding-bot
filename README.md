@@ -12,6 +12,7 @@ npm i
 
 ## How to run
 Just open **index.html** file on your browser.
+
 ** Click on the black part of the screen to change the player position.
 
 ## How to run in development mode
